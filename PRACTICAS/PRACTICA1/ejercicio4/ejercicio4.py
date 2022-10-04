@@ -38,44 +38,188 @@ pca.fit(X_train)
 X_train = pca.fit_transform(X_train)
 X_test = pca.transform(X_test)
 
-# Apply KNN
-for i in range(1, 20):
-    knn = KNeighborsClassifier(n_neighbors=i)
-    knn.fit(X_train, y_train)
-    y_pred = knn.predict(X_test)
-    knn_size.append(i)
-    knn_accuracy.append(metrics.accuracy_score(y_test, y_pred))
-    knn_error.append(1-metrics.accuracy_score(y_test, y_pred))
+# Creamos el modelo
+model = KNeighborsClassifier()
+model2 = DecisionTreeClassifier()
 
-# Apply Decision Tree
-for i in range(1, 20):
-    arbol = DecisionTreeClassifier(max_depth=i)
-    arbol.fit(X_train, y_train)
-    y_pred = arbol.predict(X_test)
-    arbol_size.append(i)
-    arbol_accuracy.append(metrics.accuracy_score(y_test, y_pred))
-    arbol_error.append(1-metrics.accuracy_score(y_test, y_pred))
+# Tamano del modelo
+knn_size.append(len(X_train))
+arbol_size.append(len(X_train))
 
-# Plot the results of KNN and Decision Tree in the same graph (accuracy) 
-plt.plot(knn_size, knn_accuracy, label='KNN')
-plt.plot(arbol_size, arbol_accuracy, label='Arbol')
-plt.xlabel('Tamaño')
-plt.ylabel('Accuracy')
-plt.title('Accuracy KNN vs Arbol de Decisión en 2D')
+# Entrenamos el modelo
+model.fit(X_train, y_train)
+model2.fit(X_train, y_train)
+
+# Hacemos las predicciones
+y_pred = model.predict(X_test)
+y_pred2 = model2.predict(X_test)
+
+# Calculamos la precision
+precision = metrics.accuracy_score(y_test, y_pred)
+precision2 = metrics.accuracy_score(y_test, y_pred2)
+
+# Calculamos el error
+error = 1 - precision
+error2 = 1 - precision2
+
+# Guardamos los resultados
+knn_accuracy.append(precision)
+knn_error.append(error)
+arbol_accuracy.append(precision2)
+arbol_error.append(error2)
+
+# Cargamos el dataset Wine data
+wine = datasets.load_wine()
+X = wine.data
+y = wine.target
+
+# Split data into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+
+# Standardize the data
+scaler.fit(X_train)
+X_train = scaler.transform(X_train)
+X_test = scaler.transform(X_test)
+
+# Apply PCA
+pca.fit(X_train)
+
+# Fit and transform data
+X_train = pca.fit_transform(X_train)
+X_test = pca.transform(X_test)
+
+# Tamano del modelo
+knn_size.append(len(X_train))
+arbol_size.append(len(X_train))
+
+# Entrenamos el modelo
+model.fit(X_train, y_train)
+model2.fit(X_train, y_train)
+
+# Hacemos las predicciones
+y_pred = model.predict(X_test)
+y_pred2 = model2.predict(X_test)
+
+# Calculamos la precision
+precision = metrics.accuracy_score(y_test, y_pred)
+precision2 = metrics.accuracy_score(y_test, y_pred2)
+
+# Calculamos el error
+error = 1 - precision
+error2 = 1 - precision2
+
+# Guardamos los resultados
+knn_accuracy.append(precision)
+knn_error.append(error)
+arbol_accuracy.append(precision2)
+arbol_error.append(error2)
+
+# Cargamos el dataset Diabetes data
+diabetes = datasets.load_diabetes()
+X = diabetes.data
+y = diabetes.target
+
+# Split data into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+
+# Standardize the data
+scaler.fit(X_train)
+X_train = scaler.transform(X_train)
+X_test = scaler.transform(X_test)
+
+# Apply PCA
+pca.fit(X_train)
+
+# Fit and transform data
+X_train = pca.fit_transform(X_train)
+X_test = pca.transform(X_test)
+
+# Tamano del modelo
+knn_size.append(len(X_train))
+arbol_size.append(len(X_train))
+
+# Entrenamos el modelo
+model.fit(X_train, y_train)
+model2.fit(X_train, y_train)
+
+# Hacemos las predicciones
+y_pred = model.predict(X_test)
+y_pred2 = model2.predict(X_test)
+
+# Calculamos la precision
+precision = metrics.accuracy_score(y_test, y_pred)
+precision2 = metrics.accuracy_score(y_test, y_pred2)
+
+# Calculamos el error
+error = 1 - precision
+error2 = 1 - precision2
+
+# Guardamos los resultados
+knn_accuracy.append(precision)
+knn_error.append(error)
+arbol_accuracy.append(precision2)
+arbol_error.append(error2)
+
+# Cargamos el dataset Breast cancer data
+cancer = datasets.load_breast_cancer()
+X = cancer.data
+y = cancer.target
+
+# Split data into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+
+# Standardize the data
+scaler.fit(X_train)
+X_train = scaler.transform(X_train)
+X_test = scaler.transform(X_test)
+
+# Apply PCA
+pca.fit(X_train)
+
+# Fit and transform data
+X_train = pca.fit_transform(X_train)
+X_test = pca.transform(X_test)
+
+# Tamano del modelo
+knn_size.append(len(X_train))
+arbol_size.append(len(X_train))
+
+# Entrenamos el modelo
+model.fit(X_train, y_train)
+model2.fit(X_train, y_train)
+
+# Hacemos las predicciones
+y_pred = model.predict(X_test)
+y_pred2 = model2.predict(X_test)
+
+# Calculamos la precision
+precision = metrics.accuracy_score(y_test, y_pred)
+precision2 = metrics.accuracy_score(y_test, y_pred2)
+
+# Calculamos el error
+error = 1 - precision
+error2 = 1 - precision2
+
+# Guardamos los resultados
+knn_accuracy.append(precision)
+knn_error.append(error)
+arbol_accuracy.append(precision2)
+arbol_error.append(error2)
+
+
+
+# Generamos el grafico de los resultados de los modelos KNN y Arbol de decision
+plt.figure(figsize=(10, 5))
+plt.subplot(1, 2, 1)
+plt.plot(knn_size, knn_accuracy, label='KNN Accuracy')
+plt.plot(arbol_size, arbol_accuracy, label='Arbol de decision Accuracy')
+plt.plot(knn_size, knn_error, label='KNN Error')
+plt.plot(arbol_size, arbol_error, label='Arbol de decision Error')
+plt.xlabel('Tamano del modelo (train) ')
+plt.ylabel('Precision/Error del modelo')
+plt.title('Algoritmos KNN y Arbol de decision en 2D')
 plt.legend()
-plt.show()
-plt.savefig('images/ejercicio4_accuracy_2dimesiones.png')
-
-# Plot error rate vs k for KNN and Decision Tree 
-plt.plot(knn_size, knn_error, label='KNN')
-plt.plot(arbol_size, arbol_error, label='Arbol')
-plt.xlabel('Tamaño')
-plt.ylabel('Error')
-plt.title('Error KNN vs Arbol de Decisión en 2D')
-plt.legend()
-plt.show()
-plt.savefig('images/ejercicio4_error_2dimesiones.png')
-
+plt.savefig('images/ejercicio4_2dimesiones.png')
 
 
 

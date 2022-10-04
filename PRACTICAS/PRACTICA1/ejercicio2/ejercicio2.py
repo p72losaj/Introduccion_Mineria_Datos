@@ -115,14 +115,13 @@ knn_error.append(error)
 arbol_accuracy.append(precision2)
 arbol_error.append(error2)
 
-# Generamos el grafico del arbol de decision
-
-# plt.plot(arbol_size, arbol_accuracy, label='Accuracy');plt.plot(arbol_size, arbol_error, label='Error');plt.xlabel('Tamaño del modelo');plt.ylabel('Accuracy/Error');plt.title('Arbol de decision');plt.legend();plt.savefig("images/ArbolDecision.png")
-
-# Generamos el grafico del knn
-
-# plt.plot(knn_size, knn_accuracy, label='Accuracy');plt.plot(knn_size, knn_error, label='Error');plt.xlabel('Tamaño del modelo');plt.ylabel('Accuracy/Error');plt.title('KNN');plt.legend();plt.savefig("images/K-vecinos.png")
-
-# Generamos el grafico de comparacion
-
-plt.plot(knn_size, knn_accuracy, label='KNN_Accuracy');plt.plot(knn_size, knn_error, label='KNN_Error');plt.plot(arbol_size, arbol_accuracy, label='Arbol_Accuracy');plt.plot(arbol_size, arbol_error, label='Arbol_Error');plt.xlabel('Tamaño del modelo');plt.ylabel('Accuracy/Error');plt.title('Comparacion de algoritmos');plt.legend();plt.savefig("images/Comparacion.png")
+# Generamos el grafico de comparacion de los modelos
+plt.plot(knn_size, knn_accuracy, label='KNN_Accuracy')
+plt.plot(knn_size, knn_error, label='KNN_Error')
+plt.plot(arbol_size, arbol_accuracy, label='Arbol_Accuracy')
+plt.plot(arbol_size, arbol_error, label='Arbol_Error')
+plt.xlabel('Tamaño del modelo (train)')
+plt.ylabel('Accuracy/Error')
+plt.title('Comparacion de algoritmos de clasificacion (KNN vs Arbol de decision)') 
+plt.legend()
+plt.savefig("images/Comparacion.png")
