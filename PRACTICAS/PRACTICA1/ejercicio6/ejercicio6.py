@@ -7,7 +7,6 @@ from sklearn import metrics
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
-import matplotlib.pyplot as plt
 from sklearn.datasets import fetch_openml # fetch_openml is able to fetch data from openml.org, the open machine learning repository.
 from sklearn.impute import SimpleImputer
 # iterative imputer

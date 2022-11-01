@@ -83,7 +83,6 @@ X_train_breast_cancer, X_test_breast_cancer, y_train_breast_cancer, y_test_breas
 KNN.fit(X_train_breast_cancer, y_train_breast_cancer)
 # Creamos el modelo de arbol
 DecisionTree.fit(X_train_breast_cancer, y_train_breast_cancer)
-
 # Estudiamos el efecto del SequentialFeatureSelector en el modelo de KNN
 for i in range(1, X_train_breast_cancer.shape[1]+1):
     # Creamos el modelo de KNN
