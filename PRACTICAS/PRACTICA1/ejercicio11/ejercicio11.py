@@ -20,3 +20,13 @@ sns.heatmap(pd.DataFrame(wine.data, columns=wine.feature_names).corr(), annot=Tr
 plt.title("Matriz de correlacion Wine")
 plt.savefig('wine_corr.png')
 plt.clf()
+
+sns.heatmap(pd.DataFrame(diabetes.data, columns=diabetes.feature_names).corr(), annot=True)
+plt.title("Matriz de correlacion Diabetes")
+plt.savefig('diabetes_corr.png')
+plt.clf()
+
+sns.heatmap(pd.DataFrame(cancer.data, columns=cancer.feature_names).corr(), annot=True)
+plt.title("Matriz de correlacion Cancer")
+plt.savefig('cancer_corr.png')
+plt.clf()
