@@ -61,12 +61,65 @@ friedman_arbol_knn_svm_wine = friedmanchisquare(pred_arbol[1], pred_knn[1], pred
 friedman_arbol_knn_svm_breast_cancer = friedmanchisquare(pred_arbol[2], pred_knn[2], pred_svm[2])
 friedman_arbol_knn_svm_digits = friedmanchisquare(pred_arbol[3], pred_knn[3], pred_svm[3])
 
-# Comparamos el mejor metodo segun Friedman con el resto de metodos usando Holm
-mc = MultiComparison(pred_arbol[0], pred_knn[0])
-result = mc.tukeyhsd()
-# Almacenamos los resultados en un fichero de texto
-f = open('ejercicio5.txt', 'w')
-f.write('Resultados de comparacion de tres metodos de clasificacion en N datasets (p<0.05) usando Friedman y Holm')
+# Rangos de Friedman
+rangos_friedman = [friedman_arbol_knn_svm_iris[0], friedman_arbol_knn_svm_wine[0], friedman_arbol_knn_svm_breast_cancer[0], friedman_arbol_knn_svm_digits[0]]
+# Rango medio de Friedman
+rango_medio_friedman = sum(rangos_friedman)/len(rangos_friedman)
+# Rango medio de Friedman por dataset
+rango_medio_friedman_dataset = [rango_medio_friedman, rango_medio_friedman, rango_medio_friedman, rango_medio_friedman]
 
 
-print(result)
+# Comparamos el mejor metodo segun el rango medio de Friedman con el resto de metodos (p<0.05) usando Holm (p<0.05)
+# Dataset 1
+if (friedman_arbol_knn_svm_iris[0] > rango_medio_friedman_dataset[0]):
+    print("El mejor metodo de clasificacion para el dataset 1 es el arbol de decision")
+    print("El arbol de decision es mejor que el k-vecinos con un p-value de " + str(friedman_arbol_knn_svm_iris[1]))
+    print("El arbol de decision es mejor que el SVM con un p-value de " + str(friedman_arbol_knn_svm_iris[1]))
+elif (friedman_arbol_knn_svm_iris[0] < rango_medio_friedman_dataset[0]):
+    print("El mejor metodo de clasificacion para el dataset 1 es el k-vecinos")
+    print("El k-vecinos es mejor que el arbol de decision con un p-value de " + str(friedman_arbol_knn_svm_iris[1]))
+    print("El k-vecinos es mejor que el SVM con un p-value de " + str(friedman_arbol_knn_svm_iris[1]))
+else:
+    print("El mejor metodo de clasificacion para el dataset 1 es el SVM")
+    print("El SVM es mejor que el arbol de decision con un p-value de " + str(friedman_arbol_knn_svm_iris[1]))
+    print("El SVM es mejor que el k-vecinos con un p-value de " + str(friedman_arbol_knn_svm_iris[1]))
+# Dataset 2
+if (friedman_arbol_knn_svm_wine[0] > rango_medio_friedman_dataset[1]):
+    print("El mejor metodo de clasificacion para el dataset 2 es el arbol de decision")
+    print("El arbol de decision es mejor que el k-vecinos con un p-value de " + str(friedman_arbol_knn_svm_wine[1]))
+    print("El arbol de decision es mejor que el SVM con un p-value de " + str(friedman_arbol_knn_svm_wine[1]))
+elif (friedman_arbol_knn_svm_wine[0] < rango_medio_friedman_dataset[1]):
+    print("El mejor metodo de clasificacion para el dataset 2 es el k-vecinos")
+    print("El k-vecinos es mejor que el arbol de decision con un p-value de " + str(friedman_arbol_knn_svm_wine[1]))
+    print("El k-vecinos es mejor que el SVM con un p-value de " + str(friedman_arbol_knn_svm_wine[1]))
+else:
+    print("El mejor metodo de clasificacion para el dataset 2 es el SVM")
+    print("El SVM es mejor que el arbol de decision con un p-value de " + str(friedman_arbol_knn_svm_wine[1]))
+    print("El SVM es mejor que el k-vecinos con un p-value de " + str(friedman_arbol_knn_svm_wine[1]))
+# Dataset 3
+if (friedman_arbol_knn_svm_breast_cancer[0] > rango_medio_friedman_dataset[2]):
+    print("El mejor metodo de clasificacion para el dataset 3 es el arbol de decision")
+    print("El arbol de decision es mejor que el k-vecinos con un p-value de " + str(friedman_arbol_knn_svm_breast_cancer[1]))
+    print("El arbol de decision es mejor que el SVM con un p-value de " + str(friedman_arbol_knn_svm_breast_cancer[1]))
+elif (friedman_arbol_knn_svm_breast_cancer[0] < rango_medio_friedman_dataset[2]):
+    print("El mejor metodo de clasificacion para el dataset 3 es el k-vecinos")
+    print("El k-vecinos es mejor que el arbol de decision con un p-value de " + str(friedman_arbol_knn_svm_breast_cancer[1]))
+    print("El k-vecinos es mejor que el SVM con un p-value de " + str(friedman_arbol_knn_svm_breast_cancer[1]))
+else:
+    print("El mejor metodo de clasificacion para el dataset 3 es el SVM")
+    print("El SVM es mejor que el arbol de decision con un p-value de " + str(friedman_arbol_knn_svm_breast_cancer[1]))
+    print("El SVM es mejor que el k-vecinos con un p-value de " + str(friedman_arbol_knn_svm_breast_cancer[1]))
+# Dataset 4
+if (friedman_arbol_knn_svm_digits[0] > rango_medio_friedman_dataset[3]):
+    print("El mejor metodo de clasificacion para el dataset 4 es el arbol de decision")
+    print("El arbol de decision es mejor que el k-vecinos con un p-value de " + str(friedman_arbol_knn_svm_digits[1]))
+    print("El arbol de decision es mejor que el SVM con un p-value de " + str(friedman_arbol_knn_svm_digits[1]))
+elif (friedman_arbol_knn_svm_digits[0] < rango_medio_friedman_dataset[3]):
+    print("El mejor metodo de clasificacion para el dataset 4 es el k-vecinos")
+    print("El k-vecinos es mejor que el arbol de decision con un p-value de " + str(friedman_arbol_knn_svm_digits[1]))
+    print("El k-vecinos es mejor que el SVM con un p-value de " + str(friedman_arbol_knn_svm_digits[1]))
+else:
+    print("El mejor metodo de clasificacion para el dataset 4 es el SVM")
+    print("El SVM es mejor que el arbol de decision con un p-value de " + str(friedman_arbol_knn_svm_digits[1]))
+    print("El SVM es mejor que el k-vecinos con un p-value de " + str(friedman_arbol_knn_svm_digits[1]))
+
