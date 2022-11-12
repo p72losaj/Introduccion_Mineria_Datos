@@ -91,7 +91,6 @@ plt.xlabel("Dataset")
 plt.ylabel("P-value")
 # Datos de los ejes
 plt.plot(["Iris", "Wine", "Breast cancer", "Digits"], [wilcoxon_arbol_knn_iris[1], wilcoxon_arbol_knn_wine[1], wilcoxon_arbol_knn_breast_cancer[1], wilcoxon_arbol_knn_digits[1]], 'ro')
-plt.legend()
 # Guardamos la figura en el directorio images
 plt.savefig("images/wilcoxon_arbol_knn.png")
 # Limpiamos la imagen 
@@ -115,8 +114,6 @@ plt.xlabel("Dataset")
 plt.ylabel("P-value")
 # Datos de los ejes
 plt.plot(["Iris", "Wine", "Breast cancer", "Digits"], [friedman_arbol_knn_svm_iris[1], friedman_arbol_knn_svm_wine[1], friedman_arbol_knn_svm_breast_cancer[1], friedman_arbol_knn_svm_digits[1]], 'ro')
-
-plt.legend()
 # Guardamos la figura en el directorio images
 plt.savefig("images/friedman_arbol_knn_svm.png")
 # Limpiamos la imagen
@@ -140,7 +137,6 @@ plt.xlabel("Dataset")
 plt.ylabel("P-value")
 # Datos de los ejes
 plt.plot(["Iris", "Wine", "Breast cancer", "Digits"], [imandavenport_arbol_knn_svm_iris[1], imandavenport_arbol_knn_svm_wine[1], imandavenport_arbol_knn_svm_breast_cancer[1], imandavenport_arbol_knn_svm_digits[1]], 'ro')
-plt.legend()
 # Guardamos la figura en el directorio images
 plt.savefig("images/imandavenport_arbol_knn_svm.png")
 # Limpiamos la imagen
