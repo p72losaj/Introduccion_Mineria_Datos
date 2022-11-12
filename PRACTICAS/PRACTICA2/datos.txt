@@ -1,0 +1,16 @@
+Test de Wilcoxon para comparar los dos metodos de clasificacion en los 4 datasets
+       Iris        Wine  Breast cancer     Digits
+0  6.000000  358.000000      139.50000  29.000000
+1  0.654721    0.845738        0.02846   0.024081
+Test de Friedman para comparar los tres metodos de clasificacion en los 4 datasets
+       Iris      Wine  Breast cancer    Digits
+0  0.400000  0.358974       6.324324  5.764706
+1  0.818731  0.835699       0.042334  0.056003
+Test de Iman-Davenport para comparar los tres metodos de clasificacion en los 4 datasets
+       Iris      Wine  Breast cancer    Digits
+0 -0.066556 -0.049955      -0.615857  0.259731
+1  0.946935  0.960158       0.537989  0.795071
+                    Iris      Wine  Breast cancer    Digits
+Wilcoxon        0.654721  0.845738       0.028460  0.024081
+Friedman        0.818731  0.835699       0.042334  0.056003
+Iman-Davenport  0.946935  0.960158       0.537989  0.795071

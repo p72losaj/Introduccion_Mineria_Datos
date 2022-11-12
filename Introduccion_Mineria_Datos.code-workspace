@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "../Introduccion_Modelos_Computacionales"
 		}
 	]
 }
