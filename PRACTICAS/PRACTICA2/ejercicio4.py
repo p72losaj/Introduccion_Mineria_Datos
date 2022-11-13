@@ -9,12 +9,11 @@ import matplotlib.pyplot as plt
 from sklearn.tree import DecisionTreeClassifier
 # k-vecinos
 from sklearn.neighbors import KNeighborsClassifier
-
 # SVM
 from sklearn.svm import SVC
-
 # Wilcoxon test para comparar dos metodos de clasificacion en N datasets
 from scipy.stats import wilcoxon
+from sklearn.model_selection import train_test_split
 
 # Test de Friedman para comparar tres metodos de clasificacion en N datasets
 from scipy.stats import friedmanchisquare
@@ -31,47 +30,60 @@ digits = datasets.load_digits()
 # Modelos de entrenamiento
 arbol = DecisionTreeClassifier()
 knn = KNeighborsClassifier(n_neighbors=5)
+svm = SVC(kernel='linear', C=1)
 
 pred_arbol = []; pred_knn = []; pred_svm = []
 
 # Entrenamos el arbol de decision
-arbol.fit(iris.data, iris.target)
-pred_arbol.append(arbol.predict(iris.data))
+X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.3, random_state=1)
+arbol.fit(X_train, y_train)
+pred_arbol.append(arbol.predict(X_test))
 
-arbol.fit(wine.data, wine.target)
-pred_arbol.append(arbol.predict(wine.data))
+X_train, X_test, y_train, y_test = train_test_split(wine.data, wine.target, test_size=0.3, random_state=1)
+arbol.fit(X_train, y_train)
+pred_arbol.append(arbol.predict(X_test))
 
-arbol.fit(breast_cancer.data, breast_cancer.target)
-pred_arbol.append(arbol.predict(breast_cancer.data))
+X_train, X_test, y_train, y_test = train_test_split(breast_cancer.data, breast_cancer.target, test_size=0.3, random_state=1)
+arbol.fit(X_train, y_train)
+pred_arbol.append(arbol.predict(X_test))
 
-arbol.fit(digits.data, digits.target)
-pred_arbol.append(arbol.predict(digits.data))
+X_train, X_test, y_train, y_test = train_test_split(digits.data, digits.target, test_size=0.3, random_state=1)
+arbol.fit(X_train, y_train)
+pred_arbol.append(arbol.predict(X_test))
 
 # Entrenamos el k-vecinos
-knn.fit(iris.data, iris.target)
-pred_knn.append(knn.predict(iris.data))
+X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.3, random_state=1)
+knn.fit(X_train, y_train)
+pred_knn.append(knn.predict(X_test))
 
-knn.fit(wine.data, wine.target)
-pred_knn.append(knn.predict(wine.data))
+X_train, X_test, y_train, y_test = train_test_split(wine.data, wine.target, test_size=0.3, random_state=1)
+knn.fit(X_train, y_train)
+pred_knn.append(knn.predict(X_test))
 
-knn.fit(breast_cancer.data, breast_cancer.target)
-pred_knn.append(knn.predict(breast_cancer.data))
+X_train, X_test, y_train, y_test = train_test_split(breast_cancer.data, breast_cancer.target, test_size=0.3, random_state=1)
+knn.fit(X_train, y_train)
+pred_knn.append(knn.predict(X_test))
 
-knn.fit(digits.data, digits.target)
-pred_knn.append(knn.predict(digits.data))
+X_train, X_test, y_train, y_test = train_test_split(digits.data, digits.target, test_size=0.3, random_state=1)
+knn.fit(X_train, y_train)
+pred_knn.append(knn.predict(X_test))
 
 # Entrenamos el SVM
-svm = SVC(kernel='linear', C=1).fit(iris.data, iris.target)
-pred_svm.append(svm.predict(iris.data))
+X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.3, random_state=1)
+svm.fit(X_train, y_train)
+pred_svm.append(svm.predict(X_test))
 
-svm = SVC(kernel='linear', C=1).fit(wine.data, wine.target)
-pred_svm.append(svm.predict(wine.data))
+X_train, X_test, y_train, y_test = train_test_split(wine.data, wine.target, test_size=0.3, random_state=1)
+svm.fit(X_train, y_train)
+pred_svm.append(svm.predict(X_test))
 
-svm = SVC(kernel='linear', C=1).fit(breast_cancer.data, breast_cancer.target)
-pred_svm.append(svm.predict(breast_cancer.data))
+X_train, X_test, y_train, y_test = train_test_split(breast_cancer.data, breast_cancer.target, test_size=0.3, random_state=1)
+svm.fit(X_train, y_train)
+pred_svm.append(svm.predict(X_test))
 
-svm = SVC(kernel='linear', C=1).fit(digits.data, digits.target)
-pred_svm.append(svm.predict(digits.data))
+X_train, X_test, y_train, y_test = train_test_split(digits.data, digits.target, test_size=0.3, random_state=1)
+svm.fit(X_train, y_train)
+pred_svm.append(svm.predict(X_test))
 
 # Test de Wilcoxon para comparar dos metodos de clasificacion en N datasets
 # Comparacion arbol de decision y k-vecinos
