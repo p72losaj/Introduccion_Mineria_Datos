@@ -8,10 +8,15 @@ from sklearn import metrics
 from sklearn.model_selection import train_test_split
 import wittgenstein as lw
 import pandas as pd
+# Biblioteca para transformar archivo .data en .csv
+import csv
+import numpy as np
 
 # Read dataset para el modelo ripper
 iris = pd.read_csv("iris.csv")
 titanic = pd.read_csv("titanic.csv")
+breast_cancer = pd.read_csv("breast_cancer.csv")
+
 # Create and train model
 ripper_clf = lw.RIPPER()
 ripper_precision = []
@@ -34,7 +39,16 @@ y_test = test['Embarked']
 ripper_clf.score(X_test, y_test)
 # Calculamos la precision del modelo
 ripper_precision.append(ripper_clf.score(X_test, y_test))
-# Read dataset para el modelo ripper 2 (con 2 reglas)
 
+# Read dataset para el modelo ripper 3 (con 2 reglas)
+train, test = train_test_split(breast_cancer, test_size=.33)
+# Create and train model
+ripper_clf.fit(breast_cancer, class_feat="diagnosis", pos_class='M')
+# Score
+X_test = test.drop('diagnosis', axis=1)
+y_test = test['diagnosis']
+ripper_clf.score(X_test, y_test)
+# Calculamos la precision del modelo
+ripper_precision.append(ripper_clf.score(X_test, y_test))
 
 print("Precision de los modelos ripper: ", ripper_precision)
