@@ -10,20 +10,31 @@ import wittgenstein as lw
 import pandas as pd
 
 # Read dataset para el modelo ripper
-df = pd.read_csv("iris.csv")
-train, test = train_test_split(df, test_size=.33)
+iris = pd.read_csv("iris.csv")
+titanic = pd.read_csv("titanic.csv")
 # Create and train model
 ripper_clf = lw.RIPPER()
 ripper_precision = []
-ripper_clf.fit(df, class_feat="variety", pos_class='Versicolor')
+ripper_clf.fit(iris, class_feat="variety", pos_class='Versicolor')
 # Score
+train, test = train_test_split(iris, test_size=.33)
 X_test = test.drop('variety', axis=1)
 y_test = test['variety']
 ripper_clf.score(X_test, y_test)
 # Calculamos la precision del modelo
 ripper_precision.append(ripper_clf.score(X_test, y_test))
 
-# Read dataset para el modelo ripper
-# Descargar el archivo wine.csv de https://www.kaggle.com/brynja/wineuci
+# Read dataset para el modelo ripper 2 (con 2 reglas) 
+train, test = train_test_split(titanic, test_size=.33)
+# Create and train model
+ripper_clf.fit(titanic, class_feat="Embarked", pos_class='C')
+# Score
+X_test = test.drop('Embarked', axis=1)
+y_test = test['Embarked']
+ripper_clf.score(X_test, y_test)
+# Calculamos la precision del modelo
+ripper_precision.append(ripper_clf.score(X_test, y_test))
+# Read dataset para el modelo ripper 2 (con 2 reglas)
 
-df = pd.read_csv("wine.csv")
+
+print("Precision de los modelos ripper: ", ripper_precision)
