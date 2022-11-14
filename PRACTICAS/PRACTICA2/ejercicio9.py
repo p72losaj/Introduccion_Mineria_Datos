@@ -1,54 +1,89 @@
-# Ejercicio 8 de la practica 2 de imd
+# Ejercicio 9 de la practica 2 de imd
 # Autor: Jaime Lorenzo Sanchez
 
 # Listado de bibliotecas
 from sklearn import datasets
 from sklearn.tree import DecisionTreeClassifier
-from sklearn import metrics
 from sklearn.model_selection import train_test_split
 import wittgenstein as lw
 import pandas as pd
-# Biblioteca para transformar archivo .data en .csv
-import csv
-import numpy as np
+import matplotlib.pyplot as plt
 
-# Read dataset para el modelo ripper
-iris = pd.read_csv("iris.csv")
-titanic = pd.read_csv("titanic.csv")
-breast_cancer = pd.read_csv("breast_cancer.csv")
-
+# Read dataset
+df = pd.read_csv("iris.csv")
+train, test = train_test_split(df, test_size=.33)
+datasets = ["iris"]
 # Create and train model
-ripper_clf = lw.RIPPER()
-ripper_precision = []
-ripper_clf.fit(iris, class_feat="variety", pos_class='Versicolor')
+ripper_clf = lw.RIPPER(); ripper_accuracy = []
+ripper_clf.fit(df, class_feat="variety", pos_class='Versicolor')
+
 # Score
-train, test = train_test_split(iris, test_size=.33)
 X_test = test.drop('variety', axis=1)
 y_test = test['variety']
-ripper_clf.score(X_test, y_test)
-# Calculamos la precision del modelo
-ripper_precision.append(ripper_clf.score(X_test, y_test))
+ripper_accuracy.append(ripper_clf.score(X_test, y_test)) # Accuracy
 
-# Read dataset para el modelo ripper 2 (con 2 reglas) 
-train, test = train_test_split(titanic, test_size=.33)
-# Create and train model
-ripper_clf.fit(titanic, class_feat="Embarked", pos_class='C')
-# Score
-X_test = test.drop('Embarked', axis=1)
-y_test = test['Embarked']
-ripper_clf.score(X_test, y_test)
-# Calculamos la precision del modelo
-ripper_precision.append(ripper_clf.score(X_test, y_test))
+# Entrenamiento y test del arbol de decision
+X_train = train.drop('variety', axis=1)
+y_train = train['variety']
+tree_clf = DecisionTreeClassifier(); tree_accuracy = []
+tree_clf.fit(X_train, y_train)
+tree_accuracy.append(tree_clf.score(X_test, y_test)) # Accuracy
 
-# Read dataset para el modelo ripper 3 (con 2 reglas)
-train, test = train_test_split(breast_cancer, test_size=.33)
+# Dataset de prueba Breast Cancer
+df = pd.read_csv("breast_cancer.csv")
+train, test = train_test_split(df, test_size=.33)
+datasets.append("breast_cancer")
 # Create and train model
-ripper_clf.fit(breast_cancer, class_feat="diagnosis", pos_class='M')
+ripper_clf = lw.RIPPER()
+ripper_clf.fit(df, class_feat="diagnosis", pos_class='M')
 # Score
 X_test = test.drop('diagnosis', axis=1)
 y_test = test['diagnosis']
-ripper_clf.score(X_test, y_test)
-# Calculamos la precision del modelo
-ripper_precision.append(ripper_clf.score(X_test, y_test))
+ripper_accuracy.append(ripper_clf.score(X_test, y_test)) # Accuracy
 
-print("Precision de los modelos ripper: ", ripper_precision)
+# Entrenamiento y test del arbol de decision
+X_train = train.drop('diagnosis', axis=1)
+y_train = train['diagnosis']
+tree_clf = DecisionTreeClassifier()
+tree_clf.fit(X_train, y_train)
+tree_accuracy.append(tree_clf.score(X_test, y_test)) # Accuracy
+
+# Dataset de prueba titanic
+df = pd.read_csv("titanic.csv")
+# Creamos una copia del dataset para poder eliminar las filas que den errores
+df2 = df.copy()
+df2.drop(['Name', 'Ticket', 'Cabin', 'Sex','Age','Embarked'], axis=1)
+train, test = train_test_split(df2, test_size=.33)
+datasets.append("titanic")
+# Create and train model
+ripper_clf = lw.RIPPER()
+ripper_clf.fit(df2, class_feat="Survived", pos_class=1)
+# Score
+X_test = test.drop('Survived', axis=1)
+y_test = test['Survived']
+ripper_accuracy.append(ripper_clf.score(X_test, y_test)) # Accuracy
+
+# Entrenamiento y test del arbol de decision
+
+# Entrenamiento y test del arbol de decision
+X_train = train.drop('Survived', axis=1)
+X_train = X_train.drop(['Name', 'Ticket', 'Cabin', 'Sex','Age','Embarked'], axis=1)
+y_train = train['Survived']
+tree_clf = DecisionTreeClassifier()
+tree_clf.fit(X_train, y_train)
+X_test = test.drop('Survived', axis=1)
+X_test = X_test.drop(['Name', 'Ticket', 'Cabin', 'Sex','Age','Embarked'], axis=1)
+y_test = test['Survived']
+tree_accuracy.append(tree_clf.score(X_test, y_test)) # Accuracy
+
+
+
+
+# Mostramos los modelos de Ripper y el arbol de decision en un grafico
+plt.plot(datasets, ripper_accuracy, label='Ripper')
+plt.plot(datasets, tree_accuracy, label='Tree')
+plt.xlabel('Dataset')
+plt.ylabel('Accuracy')
+plt.title('Accuracy of Ripper and Tree')
+plt.legend()
+plt.savefig('images/RippervsTree.png')
