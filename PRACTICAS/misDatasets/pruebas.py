@@ -47,4 +47,13 @@ abalone_Y = abalone['Rings']
 # Transformamos los datos de abalone en numéricos
 abalone_X['Sex'] = abalone['Sex'].map({'M': 0, 'F': 1, 'I': 2})
 
+# Dataset accelerometer 
+accelerometer = pd.read_csv('accelerometer.csv', header = None,
+                names = ['wconfigd', 'pctid', 'X', 'Y', 'Z'])
+
+# Clase del dataset accelerometer
+accelerometer_features = ['pctid', 'X', 'Y', 'Z']
+accelerometer_X = accelerometer[accelerometer_features]
+accelerometer_Y = accelerometer['wconfigd']
+
 
