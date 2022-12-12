@@ -2,6 +2,7 @@
 # Dataset iris
 import pandas as pd
 from sklearn.datasets import load_breast_cancer 
+from arff import load_arff
 
 iris = pd.read_csv('iris.data', header=None,names=["sepal length","sepal width","petal length","petal width","class"])
 iris_features= ["sepal length","sepal width","petal length","petal width"]
@@ -56,4 +57,5 @@ accelerometer_features = ['pctid', 'X', 'Y', 'Z']
 accelerometer_X = accelerometer[accelerometer_features]
 accelerometer_Y = accelerometer['wconfigd']
 
+# Dataset wisconsin.arff
 
