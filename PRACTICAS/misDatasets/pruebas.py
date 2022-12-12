@@ -35,6 +35,16 @@ cpu_features = ['MYCT','MMIN','MMAX','CACH','CHMIN','CHMAX']
 cpu_X = cpu[cpu_features]
 cpu_Y = cpu['class']
 
+# Dataset abalone.data
 
+
+abalone = pd.read_csv('abalone.data', header = None,
+                names = ['Sex', 'Length', 'Diameter', 'Height', 'Whole weight', 'Shucked weight', 'Viscera weight', 'Shell weight', 'Rings'])
+
+abalone_features = ['Sex', 'Length', 'Diameter', 'Height', 'Whole weight', 'Shucked weight', 'Viscera weight', 'Shell weight']
+abalone_X = abalone[abalone_features]
+abalone_Y = abalone['Rings']
+# Transformamos los datos de abalone en numéricos
+abalone_X['Sex'] = abalone['Sex'].map({'M': 0, 'F': 1, 'I': 2})
 
 
